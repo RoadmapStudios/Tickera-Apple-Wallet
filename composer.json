@@ -1,0 +1,5 @@
+{
+    "require": {
+        "eo/passbook": "dev-master"
+    }
+}
