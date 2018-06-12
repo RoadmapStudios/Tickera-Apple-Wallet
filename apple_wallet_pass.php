@@ -15,6 +15,8 @@ use Passbook\Pass\Image;
 use Passbook\Pass\Structure;
 use Passbook\Type\EventTicket;
 
+
+
 if (!function_exists('my_modify_mimes')) {
     function my_modify_mimes($mimes)
     {
@@ -101,48 +103,60 @@ if (!function_exists('hex2RGB')) {
 if (!function_exists('appleWalletPass')) {
     function appleWalletPass($event_title, $location, $datetime, $ticket_title, $ticket_id)
     {
-
+        // $fp = fopen("sample2.txt", "w+");
+        
+       
+        
         $upload_dir = wp_upload_dir();
-
+        // fwrite($fp, "\n\n upload_dir = " . $upload_dir);
         $tc_apple_wallet_settings = get_option('tc_apple_wallet_settings');
+        // fwrite($fp, "\n\n tc_apple_wallet_settings = " . print_r($tc_apple_wallet_settings, true));
         $data = hex2RGB($tc_apple_wallet_settings['background_color']);
+        // fwrite($fp, "\n\n data = " . print_r($data, true));
         // Create an event ticket
+        // fwrite($fp, "\n\n ticket = ".$ticket_id." & ticket_title :".$ticket_title); 
         $pass = new EventTicket($ticket_id, $ticket_title);
+        // fwrite($fp, "\n\n Event ticket = ");
         $pass->setBackgroundColor('rgb(' . $data['red'] . ', ' . $data['green'] . ', ' . $data['blue'] . ')');
         $pass->setLogoText($tc_apple_wallet_settings['logo_text']);
+        // fwrite($fp, "\n\n ticket = ");
         // Create pass structure
         $structure = new Structure();
         // Add primary field
         $primary = new Field('event', $event_title);
         $primary->setLabel('Event');
         $structure->addPrimaryField($primary);
-
+        // fwrite($fp, "\n\n primary field = ");
         // Add secondary field
         $secondary = new Field('location', $location);
         $secondary->setLabel('Location');
         $structure->addSecondaryField($secondary);
-
+        // fwrite($fp, "\n\n secondary field ");
         // Add auxiliary field
         $auxiliary = new Field('datetime', $datetime);
         $auxiliary->setLabel('Date & Time');
 
         $structure->addAuxiliaryField($auxiliary);
-
+        // fwrite($fp, "\n\n auxiliary field ");
         // Add icon image
         $icon = new Image($tc_apple_wallet_settings['icon_file_abs_path'], 'icon');
         $pass->addImage($icon);
-
+        // fwrite($fp, "\n\n icon ");
         // Add logo image
         $logo = new Image($tc_apple_wallet_settings['icon_file_abs_path'], 'logo');
         $pass->addImage($logo);
-
+        // fwrite($fp, "\n\n logo ");
         // Set pass structure
         $pass->setStructure($structure);
         // Add barcode
         $barcode = new Barcode($tc_apple_wallet_settings['qr_code_type'], 'barcodeMessage');
         $pass->setBarcode($barcode);
+        // fwrite($fp, "\n\n barcode ");
         // Create pass factory instance
+        if($tc_apple_wallet_settings['pass_type_identifier'] && $tc_apple_wallet_settings['pass_type_identifier']!="" && $tc_apple_wallet_settings['team_identifier'] && $tc_apple_wallet_settings['team_identifier']!="" && $tc_apple_wallet_settings['organisation_name'] && $tc_apple_wallet_settings['organisation_name']!="" && $tc_apple_wallet_settings['p12_file_abs_path'] && $tc_apple_wallet_settings['p12_file_abs_path'] !="" && $tc_apple_wallet_settings['p12_passwrd'] && $tc_apple_wallet_settings['p12_passwrd'] !="" && $tc_apple_wallet_settings['wwrd_file_abs_path'] && $tc_apple_wallet_settings['wwrd_file_abs_path']!="") {
+            
         $factory = new PassFactory($tc_apple_wallet_settings['pass_type_identifier'], $tc_apple_wallet_settings['team_identifier'], $tc_apple_wallet_settings['organisation_name'], $tc_apple_wallet_settings['p12_file_abs_path'], $tc_apple_wallet_settings['p12_passwrd'], $tc_apple_wallet_settings['wwrd_file_abs_path']);
+        // fwrite($fp, "\n\n final ");
         $factory->setOutputPath($upload_dir["path"]);
         $fileName = $factory->package($pass);
         $displayFileName = $upload_dir["url"] . "/" . $fileName->getFilename();
@@ -152,7 +166,9 @@ if (!function_exists('appleWalletPass')) {
         } else {
             echo '<a href="' . $displayFileName . '" target="_blank"/><img src="' . plugin_dir_url(__FILE__) . 'includes/add-to-apple-wallet.svg" /></a>';
         }
-
+            
+        }
+        // fclose($fp);
     }
 }
 
@@ -172,15 +188,17 @@ if (!function_exists('tc_get_wallet_pass_for_ticket')) {
         $event_obj = new TC_Event($event_id);
         $location_obj = get_post_meta($event_id, '', false);
         $ticket = new TC_Ticket($ticket_id);
-        $fp = fopen("sample.txt", "w+");
-        fwrite($fp, "Location Obj = " . print_r($location_obj, true));
-        fwrite($fp, "\nLocation event_location = " . print_r($location_obj['event_location'], true));
-        fwrite($fp, "\nLocation event_date_time = " . print_r($location_obj['event_date_time'], true));
-        fclose($fp);
+        // $fp = fopen("sample.txt", "w+");
+        // fwrite($fp, "Location Obj = " . print_r($location_obj, true));
+        // fwrite($fp, "\nLocation event_location = " . print_r($location_obj['event_location'], true));
+        // fwrite($fp, "\nLocation event_date_time = " . print_r($location_obj['event_date_time'], true));
+        // fclose($fp);
         $wallet_pass = appleWalletPass($event_obj->details->post_title, $location_obj['event_location'][0], $location_obj['event_date_time'][0], $ticket->details->post_title, $ticket_id);
         // echo $wallet_pass;
     }
 }
+
+add_filter('tc_settings_new_menus', 'tc_settings_new_menus');
 
 if (!function_exists('tc_settings_new_menus')) {
     function tc_settings_new_menus($menus)
@@ -189,7 +207,7 @@ if (!function_exists('tc_settings_new_menus')) {
         return $menus;
     }
 }
-add_filter('tc_settings_new_menus', 'tc_settings_new_menus');
+add_action('tc_settings_menu_wallet', 'tc_settings_menu_wallet');
 
 if (!function_exists('tc_settings_menu_wallet')) {
     function tc_settings_menu_wallet()
@@ -198,9 +216,6 @@ if (!function_exists('tc_settings_menu_wallet')) {
         include plugin_dir_path(__FILE__) . 'includes/tc_settings_new_menu_apple_wallet_pass.php'; //
     }
 }
-add_action('tc_settings_menu_wallet', 'tc_settings_menu_wallet');
-
-
 if (!function_exists('setAppleMimeType')) {
     function setAppleMimeType()
     {
