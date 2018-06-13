@@ -33,6 +33,7 @@ $tc_apple_wallet_settings = get_option('tc_apple_wallet_settings');
             // Use the wordpress function to upload
             // test_upload_pdf corresponds to the position in the $_FILES array
             // 0 means the content is not associated with any other posts
+            print_r($_FILES['wwrd_file']);
             $uploaded=media_handle_upload('wwrd_file', 0);
 
             print_r($uploaded);
@@ -117,7 +118,6 @@ $tc_apple_wallet_settings = get_option('tc_apple_wallet_settings');
                                     <p class="description"><?php _e('Icon File', 'tcawp'); ?></p>
                                 </td>
                             </tr>
-
                             <tr>
                                 <th scope="row"><label for="logo_text"><?php _e('Logo Text', 'tcawp') ?></label></th>
                                 <td>
@@ -125,7 +125,6 @@ $tc_apple_wallet_settings = get_option('tc_apple_wallet_settings');
                                     <p class="description"><?php _e('Logo Text', 'tcawp'); ?></p>
                                 </td>
                             </tr>
-
                             <tr>
                                 <th scope="row"><label for="background_color"><?php _e('Background Color', 'tcawp') ?></label></th>
                                 <td>
@@ -133,7 +132,6 @@ $tc_apple_wallet_settings = get_option('tc_apple_wallet_settings');
                                     <p class="description"><?php _e('Background Color', 'tcawp'); ?></p>
                                 </td>
                             </tr>
-                            
                             <tr>
                                 <th scope="row"><label for="organisation_name"><?php _e('Organization Name', 'tcawp') ?></label></th>
                                 <td>
@@ -183,16 +181,9 @@ $tc_apple_wallet_settings = get_option('tc_apple_wallet_settings');
                             </tr>
 
                             <tr>
-<<<<<<< HEAD
                                 <th scope="row"></th>
                                 <td>
                                     You can read Apple wallet instruction <a href="https://developer.apple.com/library/archive/documentation/UserExperience/Conceptual/PassKit_PG/YourFirst.html" target="_blank">here</a>.
-=======
-                                <th scope="row"><?php _e('P12 password', 'tcawp') ?></label></th>
-                                <td>
-                                    <input name="tc_apple_wallet[p12_passwrd]" type="text" id="p12_passwrd" value="<?php echo isset($tc_apple_wallet_settings['p12_passwrd']) ? $tc_apple_wallet_settings['p12_passwrd'] : ''; ?>" class="regular-text">
-                                    <p class="description"><?php _e('P12 password', 'tcawp'); ?></p>
->>>>>>> c763c52c0928383d2367328938308c76125d3036
                                 </td>
                             </tr>
 

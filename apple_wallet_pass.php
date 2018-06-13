@@ -20,11 +20,9 @@ use Passbook\Type\EventTicket;
 if (!function_exists('my_modify_mimes')) {
     function my_modify_mimes($mimes)
     {
-
         $mimes['p12'] = 'application/x-pkcs12';
         $mimes['pem'] = 'application/x-pem-file';
         $mimes['pkpass'] = 'application/vnd.apple.pkpass';
-
         return $mimes;
     }
 }
@@ -104,9 +102,6 @@ if (!function_exists('appleWalletPass')) {
     function appleWalletPass($event_title, $location, $datetime, $ticket_title, $ticket_id)
     {
         // $fp = fopen("sample2.txt", "w+");
-        
-       
-        
         $upload_dir = wp_upload_dir();
         // fwrite($fp, "\n\n upload_dir = " . $upload_dir);
         $tc_apple_wallet_settings = get_option('tc_apple_wallet_settings');
@@ -164,7 +159,7 @@ if (!function_exists('appleWalletPass')) {
         if ($Android) {
             echo '<a href="https://walletpass.io?u=' . $displayFileName . '" target="_blank"/><img src="https://www.walletpasses.io/badges/badge_web_generic_en@2x.png" /></a>';
         } else {
-            echo '<a href="' . $displayFileName . '" target="_blank"/><img src="' . plugin_dir_url(__FILE__) . 'includes/add-to-apple-wallet.svg" /></a>';
+            echo '<a href="' . $displayFileName . '" target="_blank"/><img src="' . plugin_dir_url(__FILE__) . 'includes/add-to-apple-wallet.jpg" width="100px" /></a>';
         }
             
         }
