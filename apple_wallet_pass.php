@@ -20,9 +20,11 @@ use Passbook\Type\EventTicket;
 if (!function_exists('my_modify_mimes')) {
     function my_modify_mimes($mimes)
     {
+
         $mimes['p12'] = 'application/x-pkcs12';
         $mimes['pem'] = 'application/x-pem-file';
         $mimes['pkpass'] = 'application/vnd.apple.pkpass';
+
         return $mimes;
     }
 }
@@ -99,9 +101,13 @@ if (!function_exists('hex2RGB')) {
 }
 
 if (!function_exists('appleWalletPass')) {
-    function appleWalletPass($event_title, $location, $datetime, $ticket_title, $ticket_id)
+    function appleWalletPass($event_title, $location, $datetime, $ticket_title, $ticket_id, $ticket_code)
     {
         // $fp = fopen("sample2.txt", "w+");
+        
+       global $current_user;
+        get_currentuserinfo();
+        
         $upload_dir = wp_upload_dir();
         // fwrite($fp, "\n\n upload_dir = " . $upload_dir);
         $tc_apple_wallet_settings = get_option('tc_apple_wallet_settings');
@@ -127,6 +133,9 @@ if (!function_exists('appleWalletPass')) {
         $secondary->setLabel('Location');
         $structure->addSecondaryField($secondary);
         // fwrite($fp, "\n\n secondary field ");
+        $secondary1 = new Field('passenger', $current_user->user_firstname." ".$current_user->user_lastname);
+        $secondary1->setLabel('Customer');
+        $structure->addSecondaryField($secondary1);
         // Add auxiliary field
         $auxiliary = new Field('datetime', $datetime);
         $auxiliary->setLabel('Date & Time');
@@ -144,7 +153,7 @@ if (!function_exists('appleWalletPass')) {
         // Set pass structure
         $pass->setStructure($structure);
         // Add barcode
-        $barcode = new Barcode($tc_apple_wallet_settings['qr_code_type'], 'barcodeMessage');
+        $barcode = new Barcode($tc_apple_wallet_settings['qr_code_type'], $ticket_code);
         $pass->setBarcode($barcode);
         // fwrite($fp, "\n\n barcode ");
         // Create pass factory instance
@@ -157,9 +166,9 @@ if (!function_exists('appleWalletPass')) {
         $displayFileName = $upload_dir["url"] . "/" . $fileName->getFilename();
         $Android = stripos($_SERVER['HTTP_USER_AGENT'], "Android");
         if ($Android) {
-            echo '<a href="https://walletpass.io?u=' . $displayFileName . '" target="_blank"/><img src="https://www.walletpasses.io/badges/badge_web_generic_en@2x.png" /></a>';
+            echo '<a href="https://walletpass.io?u=' . $displayFileName . '" target="_blank"><img src="https://www.walletpasses.io/badges/badge_web_generic_en@2x.png" /></a>';
         } else {
-            echo '<a href="' . $displayFileName . '" target="_blank"/><img src="' . plugin_dir_url(__FILE__) . 'includes/add-to-apple-wallet.jpg" width="100px" /></a>';
+            echo '<a href="' . $displayFileName . '" target="_blank"><img src="' . plugin_dir_url(__FILE__) . 'includes/add-to-apple-wallet.jpg" width="100px" /></a>';
         }
             
         }
@@ -180,6 +189,7 @@ if (!function_exists('tc_get_wallet_pass_for_ticket')) {
         $events = get_post_meta($tickets_id, '', false); //get a ticket event id so you can obtain an event information like location, date & time, even title etc
         $event_id = $events['event_id'][0];
         $ticket_id = $events['ticket_type_id'][0];
+        $ticket_code = $events['ticket_code'][0];
         $event_obj = new TC_Event($event_id);
         $location_obj = get_post_meta($event_id, '', false);
         $ticket = new TC_Ticket($ticket_id);
@@ -188,7 +198,7 @@ if (!function_exists('tc_get_wallet_pass_for_ticket')) {
         // fwrite($fp, "\nLocation event_location = " . print_r($location_obj['event_location'], true));
         // fwrite($fp, "\nLocation event_date_time = " . print_r($location_obj['event_date_time'], true));
         // fclose($fp);
-        $wallet_pass = appleWalletPass($event_obj->details->post_title, $location_obj['event_location'][0], $location_obj['event_date_time'][0], $ticket->details->post_title, $ticket_id);
+        $wallet_pass = appleWalletPass($event_obj->details->post_title, $location_obj['event_location'][0], $location_obj['event_date_time'][0], $ticket->details->post_title, $ticket_id, $ticket_code);
         // echo $wallet_pass;
     }
 }
