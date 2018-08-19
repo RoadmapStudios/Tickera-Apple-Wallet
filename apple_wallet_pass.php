@@ -106,7 +106,6 @@ if (!function_exists('appleWalletPass')) {
         // $fp = fopen("sample2.txt", "w+");
         
        $current_user = wp_get_current_user();
-        get_currentuserinfo();
         
         $upload_dir = wp_upload_dir();
         // fwrite($fp, "\n\n upload_dir = " . $upload_dir);
