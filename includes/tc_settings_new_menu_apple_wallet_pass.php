@@ -7,6 +7,26 @@ if (isset($_POST['save_apple_wallet_settings_nonce']) && wp_verify_nonce($_POST[
 $tc_apple_wallet_settings = get_option('tc_apple_wallet_settings');
 // print_r($tc_apple_wallet_settings);
         $tc_apple_wallet = $_POST['tc_apple_wallet'];
+		
+		if(isset($_POST['icon_file']) && $_POST['icon_file']!= ""){
+			
+			$tc_apple_wallet["icon_file"] = $_POST['icon_file'];
+            $tc_apple_wallet["icon_file_id"] = $_POST['icon_file_id'];
+				
+		}
+		if(isset($_POST['wwrd_file']) && $_POST['wwrd_file']!= ""){
+			
+			$tc_apple_wallet["wwrd_file"] = $_POST['wwrd_file'];
+            $tc_apple_wallet["wwrd_file_id"] = $_POST['wwrd_file_id'];
+				
+		}
+		if(isset($_POST['p12_file']) && $_POST['p12_file']!= ""){
+			
+			$tc_apple_wallet["p12_file"] = $_POST['p12_file'];
+            $tc_apple_wallet["p12_file_id"] = $_POST['p12_file_id'];
+				
+		}
+		/*
         if(isset($_FILES['icon_file']) && $_FILES['icon_file']!=""){
             // Use the wordpress function to upload
             // test_upload_pdf corresponds to the position in the $_FILES array
@@ -71,12 +91,13 @@ $tc_apple_wallet_settings = get_option('tc_apple_wallet_settings');
                 $tc_apple_wallet["p12_file"] = $attachment_url;
                 $tc_apple_wallet["p12_file_abs_path"] = $fullsize_path;               
             }
-        }
+        } */
         update_option('tc_apple_wallet_settings', $tc_apple_wallet);
         $tc_apple_wallet_settings = get_option('tc_apple_wallet_settings');
     }
 }
 $tc_apple_wallet_settings = get_option('tc_apple_wallet_settings');
+
 ?>
 <div class="wrap tc_wrap">
     <?php if (!empty($error_message)) { ?>
@@ -113,8 +134,10 @@ $tc_apple_wallet_settings = get_option('tc_apple_wallet_settings');
                             <tr>
                                 <th scope="row"><label for="icon_file"><?php _e('Icon File', 'tcawp') ?></label></th>
                                 <td>
+									<input type="hidden" name="icon_file_id" class="form-control-tc" id="icon_file_id" value="<?php echo  $tc_apple_wallet_settings[icon_file_id]; ?>" />
 
-                                    <input name="icon_file" type="file" id="icon_file" class="regular-text">
+                                    <input name="icon_file" type="text" id="icon_file" value="<?php echo $tc_apple_wallet_settings[icon_file]; ?>" class="regular-text"><input type="button" id="upload" value="Choose File" class="sub_btn upload_image_button" data="icon_file_id" rel="icon_file">
+									
                                     <p class="description"><?php _e('Icon File', 'tcawp'); ?></p>
                                 </td>
                             </tr>
@@ -159,7 +182,9 @@ $tc_apple_wallet_settings = get_option('tc_apple_wallet_settings');
                             <tr>
                                 <th scope="row"><label for="wwrd_file"><?php _e('WWRD File', 'tcawp') ?></label></th>
                                 <td>
-                                    <input name="wwrd_file" type="file" id="wwrd_file" class="regular-text"> &nbsp; <?php if($tc_apple_wallet_settings[wwrd_file] && $tc_apple_wallet_settings[wwrd_file] !="") { ?> <a href="<?php echo $tc_apple_wallet_settings[wwrd_file]; ?>" target="_blank">Click here to download</a> <?php } ?>
+								<input type="hidden" name="wwrd_file_id" class="form-control-tc" id="wwrd_file_id" value="<?php echo  $tc_apple_wallet_settings[wwrd_file_id]; ?>" />
+								
+									<input name="wwrd_file" type="text" id="wwrd_file" value="<?php echo $tc_apple_wallet_settings[wwrd_file] ; ?>" class="regular-text"><input type="button" id="upload1" value="Choose File" class="sub_btn upload_image_button" data="wwrd_file_id" rel="wwrd_file"> &nbsp; <?php if($tc_apple_wallet_settings[wwrd_file] && $tc_apple_wallet_settings[wwrd_file] !="") { ?> <a href="<?php echo $tc_apple_wallet_settings[wwrd_file]; ?>" target="_blank">Click here to download</a> <?php } ?>
                                     <p class="description"><?php _e('WWRD File', 'tcawp'); ?></p>
                                 </td>
                             </tr>
@@ -167,7 +192,9 @@ $tc_apple_wallet_settings = get_option('tc_apple_wallet_settings');
                             <tr>
                                 <th scope="row"><label for="p12_file"><?php _e('P12 File', 'tcawp') ?></label></th>
                                 <td>
-                                    <input name="p12_file" type="file" id="p12_file"  class="regular-text"> &nbsp; <?php if($tc_apple_wallet_settings[p12_file] && $tc_apple_wallet_settings[p12_file] !="") { ?> <a href="<?php echo $tc_apple_wallet_settings[p12_file]; ?>" target="_blank">Click here to download</a> <?php } ?>
+								<input type="hidden" name="p12_file_id" class="form-control-tc" id="p12_file_id" value="value="<?php echo  $tc_apple_wallet_settings[p12_file_id]; ?>"" />
+								
+								<input name="p12_file" type="text" id="p12_file" value="<?php echo $tc_apple_wallet_settings[p12_file]; ?>" class="regular-text"><input type="button" id="upload2" value="Choose File" class="sub_btn upload_image_button" data="p12_file_id" rel="p12_file">&nbsp; <?php if($tc_apple_wallet_settings[p12_file] && $tc_apple_wallet_settings[p12_file] !="") { ?> <a href="<?php echo $tc_apple_wallet_settings[p12_file]; ?>" target="_blank">Click here to download</a> <?php } ?>
                                     <p class="description"><?php _e('P12 File', 'tcawp'); ?></p>
                                 </td>
                             </tr>
@@ -175,6 +202,7 @@ $tc_apple_wallet_settings = get_option('tc_apple_wallet_settings');
                             <tr>
                                 <th scope="row"><label for="p12_passwrd"><?php _e('P12 password', 'tcawp') ?></label></th>
                                 <td>
+									
                                     <input name="tc_apple_wallet[p12_passwrd]" type="text" id="p12_passwrd" value="<?php echo isset($tc_apple_wallet_settings['p12_passwrd']) ? $tc_apple_wallet_settings['p12_passwrd'] : ''; ?>" class="regular-text">
                                     <p class="description"><?php _e('P12 password', 'tcawp'); ?></p>
                                 </td>
@@ -200,3 +228,95 @@ $tc_apple_wallet_settings = get_option('tc_apple_wallet_settings');
         </form>
     </div>
 </div>
+<script>
+var above_id = '';
+ 
+ jQuery(document).ready(function() {
+ 
+ 
+ 
+ jQuery('#upload').click(function(e) {
+  e.preventDefault();
+  var custom_uploader = '';
+   if (custom_uploader) {
+   custom_uploader.open();
+   return;
+  }
+   
+  target_input = jQuery(this).attr('rel');
+  target_id = jQuery(this).attr('data');
+  
+  custom_uploader = wp.media.frames.file_frame = wp.media({
+   title: 'Choose Image',
+   button: {
+    text: 'Choose Image'
+   },
+   multiple: false
+  });
+   
+  custom_uploader.on('select', function() {
+   attachment = custom_uploader.state().get('selection').first().toJSON();
+   jQuery('input[name=' + target_input + ']').val(attachment.url);
+   jQuery('input[name=' + target_id + ']').val(attachment.id);
+ 
+  });
+ 
+ custom_uploader.open();
+ });
+ jQuery('#upload1').click(function(e) {
+  e.preventDefault();
+  var custom_uploader = '';
+   if (custom_uploader) {
+   custom_uploader.open();
+   return;
+  }
+   
+  target_input = jQuery(this).attr('rel');
+  target_id = jQuery(this).attr('data');
+  
+  custom_uploader = wp.media.frames.file_frame = wp.media({
+   title: 'Choose Image',
+   button: {
+    text: 'Choose Image'
+   },
+   multiple: false
+  });
+   
+  custom_uploader.on('select', function() {
+   attachment = custom_uploader.state().get('selection').first().toJSON();
+   jQuery('input[name=' + target_input + ']').val(attachment.url);
+   jQuery('input[name=' + target_id + ']').val(attachment.id);
+ 
+  });
+ 
+ custom_uploader.open();
+ });
+ jQuery('#upload2').click(function(e) {
+  e.preventDefault();
+  var custom_uploader = '';
+   if (custom_uploader) {
+   custom_uploader.open();
+   return;
+  }
+   
+  target_input = jQuery(this).attr('rel');
+  target_id = jQuery(this).attr('data');
+  
+  custom_uploader = wp.media.frames.file_frame = wp.media({
+   title: 'Choose Image',
+   button: {
+    text: 'Choose Image'
+   },
+   multiple: false
+  });
+   
+  custom_uploader.on('select', function() {
+   attachment = custom_uploader.state().get('selection').first().toJSON();
+   jQuery('input[name=' + target_input + ']').val(attachment.url);
+   jQuery('input[name=' + target_id + ']').val(attachment.id);
+  });
+ 
+ custom_uploader.open();
+ });
+ });
+</script>
