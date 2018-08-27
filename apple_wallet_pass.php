@@ -4,7 +4,7 @@ Plugin Name: Tickera - Apple+Android Wallet Pass
 Plugin URI: http://tickera.com/
 Description: Adds Apple & Android Wallet Pass for Tickera
 Author: https://Appency.nl
-Version: 1.2.
+Version: 1.2
  */
 require 'vendor/autoload.php';
 
@@ -119,6 +119,7 @@ if (!function_exists('appleWalletPass')) {
         // fwrite($fp, "\n\n Event ticket = ");
         $pass->setBackgroundColor('rgb(' . $data['red'] . ', ' . $data['green'] . ', ' . $data['blue'] . ')');
         $pass->setLogoText($tc_apple_wallet_settings['logo_text']);
+		$pass->setRelevantDate($datetime);
         // fwrite($fp, "\n\n ticket = ");
         // Create pass structure
         $structure = new Structure();
