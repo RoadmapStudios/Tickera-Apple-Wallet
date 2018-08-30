@@ -118,9 +118,14 @@ if (!function_exists('appleWalletPass')) {
         $pass = new EventTicket($ticket_id, $ticket_title);
         // fwrite($fp, "\n\n Event ticket = ");
         $pass->setBackgroundColor('rgb(' . $data['red'] . ', ' . $data['green'] . ', ' . $data['blue'] . ')');
+        // fwrite($fp, "\n\n Background = ");
         $pass->setLogoText($tc_apple_wallet_settings['logo_text']);
-		$pass->setRelevantDate($datetime);
-        // fwrite($fp, "\n\n ticket = ");
+        // fwrite($fp, "\n\n logo = ".$tc_apple_wallet_settings['logo_text'] );
+        $dtTime = date_format($datetime, "Y-m-d H:i:s");
+        // fwrite($fp, "\n\n relevant Date = ". $datetime);
+        $pass->setRelevantDate(new \DateTime($datetime));
+
+        // fwrite($fp, "\n\n ticket = ".$datetime);
         // Create pass structure
         $structure = new Structure();
         // Add primary field
