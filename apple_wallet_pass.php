@@ -3,7 +3,7 @@
 Plugin Name: Tickera - Apple+Android Wallet Pass
 Plugin URI: http://tickera.com/
 Description: Adds Apple & Android Wallet Pass for Tickera
-Author: https://Appency.nl
+Author: https://roadmapstudios.com
 Version: 1.2
  */
 require 'vendor/autoload.php';
