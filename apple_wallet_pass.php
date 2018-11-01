@@ -4,32 +4,25 @@ Plugin Name: Tickera - Apple+Android Wallet Pass
 Plugin URI: http://tickera.com/
 Description: Adds Apple & Android Wallet Pass for Tickera
 Author: https://roadmapstudios.com
-Version: 1.2
+Version: 1.2.1
  */
 require 'vendor/autoload.php';
-
 use Passbook\PassFactory;
 use Passbook\Pass\Barcode;
 use Passbook\Pass\Field;
 use Passbook\Pass\Image;
 use Passbook\Pass\Structure;
 use Passbook\Type\EventTicket;
-
-
-
 if (!function_exists('my_modify_mimes')) {
     function my_modify_mimes($mimes)
     {
-
         $mimes['p12'] = 'application/x-pkcs12';
         $mimes['pem'] = 'application/x-pem-file';
         $mimes['pkpass'] = 'application/vnd.apple.pkpass';
-
         return $mimes;
     }
 }
 add_filter('upload_mimes', 'my_modify_mimes');
-
 
 /**
  * Function which checks if it's iOS device
@@ -55,7 +48,6 @@ if (!function_exists('tc_check_is_ios')) {
 if (tc_check_is_ios()) {
     //remove comments for this check in production in order to show the column only when accessed via iOS devices
     add_filter('tc_owner_info_orders_table_fields_front', 'tc_apple_wallet_pass');
-
 }
 
 /**
@@ -193,7 +185,7 @@ if (!function_exists('appleWalletPass')) {
         // fwrite($fp, "\n\n final ");
         $factory->setOutputPath($upload_dir["path"]);
         $fileName = $factory->package($pass);
-        $displayFileName = $upload_dir["url"] . "/" . $fileName->getFilename();
+        $displayFileName = $upload_dir["url"] . "/" . $current_user->ID."_".$fileName->getFilename();
         $Android = stripos($_SERVER['HTTP_USER_AGENT'], "Android");
         if ($Android) {
             echo '<a href="https://walletpass.io?u=' . $displayFileName . '" target="_blank"><img src="https://www.walletpasses.io/badges/badge_web_generic_en@2x.png" /></a>';
