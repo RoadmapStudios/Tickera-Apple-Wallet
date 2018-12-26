@@ -120,7 +120,7 @@ if(!function_exists('appleWallet_get_blog_timezone')) {
 if (!function_exists('appleWalletPass')) {
     function appleWalletPass($event_title, $location, $datetime, $ticket_title, $ticket_id, $ticket_code)
     {
-        // $fp = fopen("sample2.txt", "w+");
+        // $fp = fopen("sample2222.txt", "w+");
         
        $current_user = wp_get_current_user();
         
@@ -184,8 +184,11 @@ if (!function_exists('appleWalletPass')) {
         $factory = new PassFactory($tc_apple_wallet_settings['pass_type_identifier'], $tc_apple_wallet_settings['team_identifier'], $tc_apple_wallet_settings['organisation_name'], $tc_apple_wallet_settings['p12_file_abs_path'], $tc_apple_wallet_settings['p12_passwrd'], $tc_apple_wallet_settings['wwrd_file_abs_path']);
         // fwrite($fp, "\n\n final ");
         $factory->setOutputPath($upload_dir["path"]);
-        $fileName = $factory->package($pass);
-        $displayFileName = $upload_dir["url"] . "/" . $current_user->ID."_".$fileName->getFilename();
+        $t=time();
+        $fileName = $factory->package($pass, $current_user->ID."_".$t);
+        // fwrite($fp, "\n\n final =>  ". $fileName->getFilename());
+        $displayFileName = $upload_dir["url"] . "/" . $fileName->getFilename();
+        // fwrite($fp, "\n\n final > ".$displayFileName);
         $Android = stripos($_SERVER['HTTP_USER_AGENT'], "Android");
         if ($Android) {
             echo '<a href="https://walletpass.io?u=' . $displayFileName . '" target="_blank"><img src="https://www.walletpasses.io/badges/badge_web_generic_en@2x.png" /></a>';
