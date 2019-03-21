@@ -49,41 +49,7 @@ if ( ! function_exists( 'tc_check_is_ios' ) ) {
 	add_filter( 'tc_owner_info_orders_table_fields_front', 'tc_apple_wallet_pass' );
 
 // }
-add_action( 'woocommerce_thankyou', 'enroll_student', 10, 1 );
-function enroll_student( $order_id ) {
-	$fp = fopen( __DIR__ . '/order.txt', 'a+' );
-	fwrite( $fp, PHP_EOL . ' order_id = ' . $order_id );
-	if ( ! $order_id ) {
-		return;
-	}
 
-	// Getting an instance of the order object
-	$order = wc_get_order( $order_id );
-	// fwrite($fp, PHP_EOL." order = " . print_r($order,true));
-	if ( $order->is_paid() ) {
-		$paid = 'yes';
-	} else {
-		$paid = 'no';
-	}
-
-	// iterating through each order items (getting product ID and the product object)
-	// (work for simple and variable products)
-	foreach ( $order->get_items() as $item_id => $item ) {
-
-		if ( $item['variation_id'] > 0 ) {
-			$product_id = $item['variation_id']; // variable product
-		} else {
-			$product_id = $item['product_id']; // simple product
-		}
-
-		// Get the product object
-		$product = wc_get_product( $product_id );
-		fwrite( $fp, PHP_EOL . ' product = ' . print_r( $product, true ) );
-	}
-	fclose( $fp );
-	// Ouptput some data
-	// echo '<p>Order ID: '. $order_id . ' — Order Status: ' . $order->get_status() . ' — Order is paid: ' . $paid . '</p>';
-}
 /**
  * show a new column on the order details page (when an order has a paid-like status - order paid, order processing, order completed)
  *
