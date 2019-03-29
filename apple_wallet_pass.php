@@ -44,11 +44,11 @@ if ( ! function_exists( 'tc_check_is_ios' ) ) {
 	}
 }
 
-// if (tc_check_is_ios()) {
+if (tc_check_is_ios()) {
 	// remove comments for this check in production in order to show the column only when accessed via iOS devices
 	add_filter( 'tc_owner_info_orders_table_fields_front', 'tc_apple_wallet_pass' );
 
-// }
+ }
 
 /**
  * show a new column on the order details page (when an order has a paid-like status - order paid, order processing, order completed)
