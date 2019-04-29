@@ -44,7 +44,7 @@ if ( ! function_exists( 'tc_check_is_ios' ) ) {
 	}
 }
 
-if (tc_check_is_ios()) {
+/* if (tc_check_is_ios()) {
 	// remove comments for this check in production in order to show the column only when accessed via iOS devices
 	add_filter( 'tc_owner_info_orders_table_fields_front', 'tc_apple_wallet_pass' );
 
@@ -190,9 +190,9 @@ if ( ! function_exists( 'appleWalletPass' ) ) {
 				// fwrite( $fp, PHP_EOL . "\n\n final > " . $displayFileName );
 				$Android = stripos( $_SERVER['HTTP_USER_AGENT'], 'Android' );
 				if ( $Android ) {
-					echo '<a href="https://walletpass.io?u=' . $displayFileName . '" target="_blank"><img src="https://www.walletpasses.io/badges/badge_web_generic_en@2x.png" /></a>';
+					echo '<a href="https://walletpass.io?u=' . $displayFileName . '" target="_system"><img src="https://www.walletpasses.io/badges/badge_web_generic_en@2x.png" /></a>';
 				} else {
-					echo '<a href="' . $displayFileName . '" target="_blank"><img src="' . plugin_dir_url( __FILE__ ) . 'includes/add-to-apple-wallet.jpg" width="100px" /></a>';
+					echo '<a href="' . $displayFileName . '" target="_system"><img src="' . plugin_dir_url( __FILE__ ) . 'includes/add-to-apple-wallet.jpg" width="100px" /></a>';
 				}
 			}
 		} else {
@@ -200,9 +200,9 @@ if ( ! function_exists( 'appleWalletPass' ) ) {
 			// fwrite( $fp, PHP_EOL . "\n\n final > " . $displayFileName );
 			$Android = stripos( $_SERVER['HTTP_USER_AGENT'], 'Android' );
 			if ( $Android ) {
-				echo '<a href="https://walletpass.io?u=' . $displayFileName . '" target="_blank"><img src="https://www.walletpasses.io/badges/badge_web_generic_en@2x.png" /></a>';
+				echo '<a href="https://walletpass.io?u=' . $displayFileName . '" target="_system"><img src="https://www.walletpasses.io/badges/badge_web_generic_en@2x.png" /></a>';
 			} else {
-				echo '<a href="' . $displayFileName . '" target="_blank"><img src="' . plugin_dir_url( __FILE__ ) . 'includes/add-to-apple-wallet.jpg" width="100px" /></a>';
+				echo '<a href="' . $displayFileName . '" target="_system"><img src="' . plugin_dir_url( __FILE__ ) . 'includes/add-to-apple-wallet.jpg" width="100px" /></a>';
 			}
 		}
 		// fclose( $fp );
