@@ -34,7 +34,7 @@ if ( ! function_exists( 'tc_check_is_ios' ) ) {
 		$iPhone  = stripos( $_SERVER['HTTP_USER_AGENT'], 'iPhone' );
 		$iPad    = stripos( $_SERVER['HTTP_USER_AGENT'], 'iPad' );
 		$Android = stripos( $_SERVER['HTTP_USER_AGENT'], 'Android' );
-		if ( $iPod || $iPhone || $iPad ) {
+		if ( $iPod || $iP / nas / content / staging / eventproky / wp - content / plugins / tickera - apple - wallet - master / vendor / eo / passbook / src / Passbook / PassFactory . phphone || $iPad ) {
 			return true;
 		} elseif ( $Android ) {
 			return true;
@@ -44,11 +44,12 @@ if ( ! function_exists( 'tc_check_is_ios' ) ) {
 	}
 }
 
-/* if (tc_check_is_ios()) {
+
+if ( tc_check_is_ios() ) {
 	// remove comments for this check in production in order to show the column only when accessed via iOS devices
 	add_filter( 'tc_owner_info_orders_table_fields_front', 'tc_apple_wallet_pass' );
 
- }
+}
 
 /**
  * show a new column on the order details page (when an order has a paid-like status - order paid, order processing, order completed)
@@ -118,11 +119,11 @@ if ( ! function_exists( 'appleWallet_get_blog_timezone' ) ) {
 
 if ( ! function_exists( 'appleWalletPass' ) ) {
 	function appleWalletPass( $event_title, $location, $datetime, $ticket_title, $ticket_id, $ticket_code, $first_name, $last_name ) {
-		// $fp = fopen( __DIR__ . '/sample2222.txt', 'a+' );
+		// $fp           = fopen( dirname( __FILE__ ) . '/sample2222.txt', 'w+' );
 		$current_user = wp_get_current_user();
 
 		$upload_dir = wp_upload_dir();
-		// fwrite( $fp, PHP_EOL . "\n\n upload_dir = " . $upload_dir );
+		// fwrite( $fp, PHP_EOL . "\n\n upload_dir = " . print_r( $upload_dir, true ) );
 		$user_dirname = $upload_dir['basedir'] . '/' . $ticket_code . '.pkpass';
 		if ( ! file_exists( $user_dirname ) ) {
 			$tc_apple_wallet_settings = get_option( 'tc_apple_wallet_settings' );
@@ -183,7 +184,10 @@ if ( ! function_exists( 'appleWalletPass' ) ) {
 				$factory = new PassFactory( $tc_apple_wallet_settings['pass_type_identifier'], $tc_apple_wallet_settings['team_identifier'], $tc_apple_wallet_settings['organisation_name'], $tc_apple_wallet_settings['p12_file_abs_path'], $tc_apple_wallet_settings['p12_passwrd'], $tc_apple_wallet_settings['wwrd_file_abs_path'] );
 				// fwrite( $fp, PHP_EOL . "\n\n final " );
 				$factory->setOutputPath( $upload_dir['path'] );
-				$t        = time();
+				$t = time();
+
+				// fwrite( $fp, PHP_EOL . "\n\n pass " . print_r( $pass, true ) );
+				// fwrite( $fp, PHP_EOL . "\n\n ticket_code " . $ticket_code );
 				$fileName = $factory->package( $pass, $ticket_code );
 				// fwrite( $fp, PHP_EOL . "\n\n final =>  " . $fileName->getFilename() );
 				$displayFileName = $upload_dir['url'] . '/' . $fileName->getFilename();
@@ -229,7 +233,7 @@ if ( ! function_exists( 'tc_get_wallet_pass_for_ticket' ) ) {
 		$location_obj = get_post_meta( $event_id, '', false );
 		$ticket       = new TC_Ticket( $ticket_id );
 
-		// $fp = fopen( __DIR__ . '/sample.txt', 'a+' );
+		// $fp = fopen( dirname( __FILE__ ) . '/sample.txt', 'w+' );
 		// fwrite( $fp, PHP_EOL . 'field_name = ' . $field_name );
 		// fwrite( $fp, PHP_EOL . 'ticket_code = ' . $ticket_code );
 		// fwrite( $fp, PHP_EOL . 'events = ' . print_r( $events, true ) );
