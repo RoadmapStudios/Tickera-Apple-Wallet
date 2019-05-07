@@ -1,3 +1,8 @@
+Version 1.2.3 - 7 May 2019
+*Fixed media library access issue for pem file
+*Fixed browser issue by forcing system browser for pass download
+*Enabled iOS check for apple pass badge
+
 Version 1.2.2 - 20 March 2019
 * Fixed fatal error after Tickera update
 * Getting attendee data from Attendee meta instead of customer data

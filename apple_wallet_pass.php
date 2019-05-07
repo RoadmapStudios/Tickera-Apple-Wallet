@@ -1,10 +1,13 @@
 <?php
 /*
-Plugin Name: Tickera - Apple+Android Wallet Pass
-Plugin URI: http://tickera.com/
-Description: Adds Apple & Android Wallet Pass for Tickera
-Author: https://roadmapstudios.com
-Version: 1.2.2
+* Plugin Name: Tickera - Wallet Pass
+* Plugin URI: http://tickera.com/
+* Description: Adds Apple & Android Wallet Pass for Tickera Event Plugin for WordPress
+* Author: Roadmap Studios
+* Author URI:  https://roadmapstudios.com
+* Version: 1.2.3
+* License: GNU General Public License v3.0
+* License URI: http://www.gnu.org/licenses/gpl-3.0.html
  */
 require 'vendor/autoload.php';
 use Passbook\PassFactory;

@@ -56,4 +56,5 @@ openssl pkcs12 -export -inkey mykey.key -in developer_identity.pem -out iphone_d
 If you are using a key from the Mac OS keychain, use the PEM version you generated in the previous step. Otherwise, use the OpenSSL key you generated earlier (on Windows).
 
 ### Support
-For any functional support, please contact Tickera support team. If you run into any technical issue with this addon, please deactivate all non-essential plugins to ensure there is no plugin conflict. After this, please check the above steps again, most users create the certificate wrong or have expired certificates in their Apple account. If none of these apply to you, please open an issue here in github. 
+For any functional support, please read the documentation first. If you run into any technical issue with this addon, please deactivate all non-essential plugins to ensure there is no plugin conflict. After this, please check the above steps again, most users create the certificate wrong or have expired certificates in their Apple account. If none of these apply to you, please open an issue here in github. 
+*Important: you may need to install WP Add Mime Types plugin if you are unable to download the passes. Please check the documentation.
