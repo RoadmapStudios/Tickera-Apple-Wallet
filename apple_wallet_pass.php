@@ -33,26 +33,30 @@ add_filter( 'upload_mimes', 'my_modify_mimes' );
  */
 if ( ! function_exists( 'tc_check_is_ios' ) ) {
 	function tc_check_is_ios() {
-		$iPod    = stripos( $_SERVER['HTTP_USER_AGENT'], 'iPod' );
-		$iPhone  = stripos( $_SERVER['HTTP_USER_AGENT'], 'iPhone' );
-		$iPad    = stripos( $_SERVER['HTTP_USER_AGENT'], 'iPad' );
-		$Android = stripos( $_SERVER['HTTP_USER_AGENT'], 'Android' );
-		if ( $iPod || $iP / nas / content / staging / eventproky / wp - content / plugins / tickera - apple - wallet - master / vendor / eo / passbook / src / Passbook / PassFactory . phphone || $iPad ) {
-			return true;
-		} elseif ( $Android ) {
-			return true;
+		if ( $_SERVER['HTTP_USER_AGENT'] ) {
+			$iPod    = stripos( $_SERVER['HTTP_USER_AGENT'], 'iPod' );
+			$iPhone  = stripos( $_SERVER['HTTP_USER_AGENT'], 'iPhone' );
+			$iPad    = stripos( $_SERVER['HTTP_USER_AGENT'], 'iPad' );
+			$Android = stripos( $_SERVER['HTTP_USER_AGENT'], 'Android' );
+			if ( $iPod || $iPhone || $iPad ) {
+				return true;
+			} elseif ( $Android ) {
+				return true;
+			} else {
+				return false;
+			}
 		} else {
-			return false;
+			return true;
 		}
 	}
 }
 
 
-if ( tc_check_is_ios() ) {
+// if ( tc_check_is_ios() ) {
 	// remove comments for this check in production in order to show the column only when accessed via iOS devices
 	add_filter( 'tc_owner_info_orders_table_fields_front', 'tc_apple_wallet_pass' );
 
-}
+// }
 
 /**
  * show a new column on the order details page (when an order has a paid-like status - order paid, order processing, order completed)
@@ -170,11 +174,11 @@ if ( ! function_exists( 'appleWalletPass' ) ) {
 			// Add icon image
 			$icon = new Image( $tc_apple_wallet_settings['icon_file_abs_path'], 'icon' );
 			$pass->addImage( $icon );
-			// fwrite( $fp, PHP_EOL . "\n\n icon " );
+			// fwrite( $fp, PHP_EOL . "\n\n icon " . print_r( $icon, true ) );
 			// Add logo image
 			$logo = new Image( $tc_apple_wallet_settings['icon_file_abs_path'], 'logo' );
 			$pass->addImage( $logo );
-			// fwrite( $fp, PHP_EOL . "\n\n logo " );
+			// fwrite( $fp, PHP_EOL . "\n\n logo > " . print_r( $logo, true ) );
 			// Set pass structure
 			$pass->setStructure( $structure );
 			// Add barcode
@@ -199,7 +203,7 @@ if ( ! function_exists( 'appleWalletPass' ) ) {
 				if ( $Android ) {
 					echo '<a href="https://walletpass.io?u=' . $displayFileName . '" target="_system"><img src="https://www.walletpasses.io/badges/badge_web_generic_en@2x.png" /></a>';
 				} else {
-					echo '<a href="' . $displayFileName . '" target="_system"><img src="' . plugin_dir_url( __FILE__ ) . 'includes/add-to-apple-wallet.jpg" width="100px" /></a>';
+					echo '<a href="' . $displayFileName . '" target="_blank"><img src="' . plugin_dir_url( __FILE__ ) . 'includes/add-to-apple-wallet.jpg" width="100px" /></a>';
 				}
 			}
 		} else {
@@ -209,10 +213,10 @@ if ( ! function_exists( 'appleWalletPass' ) ) {
 			if ( $Android ) {
 				echo '<a href="https://walletpass.io?u=' . $displayFileName . '" target="_system"><img src="https://www.walletpasses.io/badges/badge_web_generic_en@2x.png" /></a>';
 			} else {
-				echo '<a href="' . $displayFileName . '" target="_system"><img src="' . plugin_dir_url( __FILE__ ) . 'includes/add-to-apple-wallet.jpg" width="100px" /></a>';
+				echo '<a href="' . $displayFileName . '" target="_blank"><img src="' . plugin_dir_url( __FILE__ ) . 'includes/add-to-apple-wallet.jpg" width="100px" /></a>';
 			}
 		}
-		// fclose( $fp );
+		fclose( $fp );
 	}
 }
 
