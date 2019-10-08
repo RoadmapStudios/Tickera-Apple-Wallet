@@ -179,9 +179,9 @@ $tc_apple_wallet_settings = get_option( 'tc_apple_wallet_settings' );
 							<tr>
 								<th scope="row"><label for="icon_file"><?php _e( 'Icon File', 'tcawp' ); ?></label></th>
 								<td>
-									<input type="hidden" name="icon_file_id" class="form-control-tc" id="icon_file_id" value="<?php echo $tc_apple_wallet_settings[ icon_file_id ]; ?>" />
+									<input type="hidden" name="icon_file_id" class="form-control-tc" id="icon_file_id" value="<?php echo $tc_apple_wallet_settings[ 'icon_file_id' ]; ?>" />
 
-									<input name="icon_file" type="text" id="icon_file" value="<?php echo $tc_apple_wallet_settings[ icon_file ]; ?>" class="regular-text"><input type="button" id="upload" value="Choose File" class="sub_btn upload_image_button" data="icon_file_id" rel="icon_file">
+									<input name="icon_file" type="text" id="icon_file" value="<?php echo $tc_apple_wallet_settings[ 'icon_file' ]; ?>" class="regular-text"><input type="button" id="upload" value="Choose File" class="sub_btn upload_image_button" data="icon_file_id" rel="icon_file">
 
 									<p class="description"><?php _e( 'Icon File', 'tcawp' ); ?></p>
 								</td>
@@ -227,13 +227,13 @@ $tc_apple_wallet_settings = get_option( 'tc_apple_wallet_settings' );
 							<tr>
 								<th scope="row"><label for="wwrd_file"><?php _e( 'WWRD File', 'tcawp' ); ?></label></th>
 								<td>
-								<input type="hidden" name="wwrd_file_id" class="form-control-tc" id="wwrd_file_id" value="<?php echo $tc_apple_wallet_settings[ wwrd_file_id ]; ?>" />
+								<input type="hidden" name="wwrd_file_id" class="form-control-tc" id="wwrd_file_id" value="<?php echo $tc_apple_wallet_settings[ 'wwrd_file_id' ]; ?>" />
 
-									<input name="wwrd_file" type="text" id="wwrd_file" value="<?php echo $tc_apple_wallet_settings[ wwrd_file ]; ?>" class="regular-text"><input type="button" id="upload1" value="Choose File" class="sub_btn upload_image_button" data="wwrd_file_id" rel="wwrd_file"> &nbsp;
+									<input name="wwrd_file" type="text" id="wwrd_file" value="<?php echo $tc_apple_wallet_settings[ 'wwrd_file' ]; ?>" class="regular-text"><input type="button" id="upload1" value="Choose File" class="sub_btn upload_image_button" data="wwrd_file_id" rel="wwrd_file"> &nbsp;
 																											<?php
-																											if ( $tc_apple_wallet_settings[ wwrd_file ] && $tc_apple_wallet_settings[ wwrd_file ] != '' ) {
+																											if ( $tc_apple_wallet_settings[ 'wwrd_file' ] && $tc_apple_wallet_settings[ 'wwrd_file' ] != '' ) {
 																												?>
-										 <a href="<?php echo $tc_apple_wallet_settings[ wwrd_file ]; ?>" target="_blank">Click here to download</a> <?php } ?>
+										 <a href="<?php echo $tc_apple_wallet_settings[ 'wwrd_file' ]; ?>" target="_blank">Click here to download</a> <?php } ?>
 									<p class="description"><?php _e( 'WWRD File', 'tcawp' ); ?></p>
 								</td>
 							</tr>
@@ -241,13 +241,13 @@ $tc_apple_wallet_settings = get_option( 'tc_apple_wallet_settings' );
 							<tr>
 								<th scope="row"><label for="p12_file"><?php _e( 'P12 File', 'tcawp' ); ?></label></th>
 								<td>
-								<input type="hidden" name="p12_file_id" class="form-control-tc" id="p12_file_id" value="value="<?php echo $tc_apple_wallet_settings[ p12_file_id ]; ?>"" />
+								<input type="hidden" name="p12_file_id" class="form-control-tc" id="p12_file_id" value="value="<?php echo $tc_apple_wallet_settings[ 'p12_file_id' ]; ?>"" />
 
-								<input name="p12_file" type="text" id="p12_file" value="<?php echo $tc_apple_wallet_settings[ p12_file ]; ?>" class="regular-text"><input type="button" id="upload2" value="Choose File" class="sub_btn upload_image_button" data="p12_file_id" rel="p12_file">&nbsp;
+								<input name="p12_file" type="text" id="p12_file" value="<?php echo $tc_apple_wallet_settings[ 'p12_file' ]; ?>" class="regular-text"><input type="button" id="upload2" value="Choose File" class="sub_btn upload_image_button" data="p12_file_id" rel="p12_file">&nbsp;
 																									<?php
-																									if ( $tc_apple_wallet_settings[ p12_file ] && $tc_apple_wallet_settings[ p12_file ] != '' ) {
+																									if ( $tc_apple_wallet_settings[ 'p12_file' ] && $tc_apple_wallet_settings[ 'p12_file' ] != '' ) {
 																										?>
-									 <a href="<?php echo $tc_apple_wallet_settings[ p12_file ]; ?>" target="_blank">Click here to download</a> <?php } ?>
+									 <a href="<?php echo $tc_apple_wallet_settings[ 'p12_file' ]; ?>" target="_blank">Click here to download</a> <?php } ?>
 									<p class="description"><?php _e( 'P12 File', 'tcawp' ); ?></p>
 								</td>
 							</tr>
