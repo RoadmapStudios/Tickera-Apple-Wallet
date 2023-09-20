@@ -5,6 +5,7 @@
 * Description: Adds Apple & Android Wallet Pass for Tickera Event Plugin for WordPress
 * Author: Roadmap Studios
 * Author URI:  https://roadmapstudios.com
+* Requires PHP: 7.4
 * Version: 1.2.3
 * License: GNU General Public License v3.0
 * License URI: http://www.gnu.org/licenses/gpl-3.0.html

@@ -1,10 +1,9 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "hash": "d611114201ca352f054cf538bba82c16",
     "content-hash": "37af52922354ae7c35d39c8fd2f59e7a",
     "packages": [
         {
@@ -13,31 +12,33 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/eymengunay/php-passbook.git",
-                "reference": "86b52b280dd39aeaaeb91f62e701911fe3e8bc17"
+                "reference": "37157ec61a95b78a03894b0267e5ba5cb7f38da6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/eymengunay/php-passbook/zipball/86b52b280dd39aeaaeb91f62e701911fe3e8bc17",
-                "reference": "86b52b280dd39aeaaeb91f62e701911fe3e8bc17",
+                "url": "https://api.github.com/repos/eymengunay/php-passbook/zipball/37157ec61a95b78a03894b0267e5ba5cb7f38da6",
+                "reference": "37157ec61a95b78a03894b0267e5ba5cb7f38da6",
                 "shasum": ""
             },
             "require": {
                 "ext-openssl": "*",
                 "ext-zip": "*",
-                "php": ">=5.4"
+                "php": ">=7.4"
             },
             "require-dev": {
-                "phpunit/phpunit": "3.7.*"
+                "nunomaduro/phpinsights": "dev-master",
+                "phpunit/phpunit": "^9.0"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.1.x-dev"
+                    "dev-master": "3.0.x-dev"
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Passbook\\": "src/"
+                "psr-4": {
+                    "Passbook\\": "src/Passbook/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -61,7 +62,11 @@
                 "tickets",
                 "wallet"
             ],
-            "time": "2018-01-24 20:19:23"
+            "support": {
+                "issues": "https://github.com/eymengunay/php-passbook/issues",
+                "source": "https://github.com/eymengunay/php-passbook/tree/v3.1.2"
+            },
+            "time": "2023-06-22T07:15:47+00:00"
         }
     ],
     "packages-dev": [],
@@ -73,5 +78,6 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "2.0.0"
 }
