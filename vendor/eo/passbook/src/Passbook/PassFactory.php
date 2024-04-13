@@ -493,7 +493,7 @@ class PassFactory
                 $fileName .= '@3x';
             }
 
-            $fileName .= '.' . $image->getImageExtension();
+            $fileName .= '.' . $image->getExtension();
             copy($image->getPathname(), $fileName);
         }
     }
@@ -526,7 +526,7 @@ class PassFactory
                 } elseif ($image->getDensity() === 3) {
                     $fileName .= '@3x';
                 }
-                $fileName .= '.' . $image->getImageExtension();
+                $fileName .= '.' . $image->getExtension();
                 copy($image->getPathname(), $fileName);
             }
         }

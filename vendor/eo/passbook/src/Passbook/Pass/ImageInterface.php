@@ -46,7 +46,7 @@ interface ImageInterface
      * Implemented in \SplFileObject
      * @return string
      */
-    public function getImageExtension();
+    public function getExtension();
 
     /**
      * Implemented in \SplFileObject

@@ -235,7 +235,7 @@ class PassValidator implements PassValidatorInterface
     private function validateImageType(PassInterface $pass)
     {
         foreach ($pass->getImages() as $image) {
-            if ('png' !== strtolower($image->getImageExtension())) {
+            if ('png' !== strtolower($image->getExtension())) {
                 $this->addError(self::IMAGE_TYPE_INVALID);
             }
         }
