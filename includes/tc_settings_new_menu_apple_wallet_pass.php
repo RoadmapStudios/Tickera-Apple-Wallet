@@ -305,6 +305,9 @@ var above_id = '';
    button: {
 	text: 'Choose Image'
    },
+   library: {
+        type: 'image/png'
+    },
    multiple: false
   });
 
