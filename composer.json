@@ -1,5 +1,58 @@
 {
+    "name": "tickera/walletpass",
+    "description": "Adds Apple & Android Wallet Pass for Tickera Event Plugin for WordPress",
+    "type": "wordpress-plugin",
+    "license": "GPL-3.0-or-later",
+    "autoload": {
+        "psr-4": {
+            "Tickera\\WalletPass\\": "includes/"
+        },
+        "classmap": []
+    },
+    "authors": [
+        {
+            "name": "Fawad Tiemoerie",
+            "email": "info@commercebird.com",
+            "role": "Owner"
+        }
+    ],
     "require": {
-        "eo/passbook": "dev-master"
+        "php": ">=8.2",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "afragen/wp-dependency-installer": "^4.3.14"
+    },
+    "require-dev": {
+        "dealerdirect/phpcodesniffer-composer-installer": "^1.2.0",
+        "filp/whoops": ">=2.18.4",
+        "php-stubs/woocommerce-stubs": "^10.5.2",
+        "php-stubs/wordpress-stubs": "^6.9.1",
+        "phpcsstandards/phpcsextra": "^1.5",
+        "phpcsstandards/phpcsutils": "^1.2.2",
+        "phpstan/extension-installer": "^1.4.3",
+        "phpstan/phpstan": "^1.12.32",
+        "roots/wordpress-no-content": ">=6.9.1",
+        "squizlabs/php_codesniffer": "^3.13.5",
+        "symfony/var-dumper": "^5.4.48",
+        "szepeviktor/phpstan-wordpress": "^1.3.5",
+        "wp-coding-standards/wpcs": "^3.3"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true,
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "phpstan/extension-installer": true
+        }
+    },
+    "scripts": {
+        "phpstan": "phpstan analyse --memory-limit=4G",
+        "phpstan:baseline": "phpstan analyse --memory-limit=4G --generate-baseline",
+        "phpcs": "phpcs --ignore=vendor/,stubs/,build/",
+        "phpcbf": "php -d memory_limit=2G vendor/bin/phpcbf --ignore=vendor/,stubs/,build/",
+        "analyse": [
+            "@phpstan",
+            "@phpcs"
+        ]
     }
 }

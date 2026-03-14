@@ -7,21 +7,27 @@ namespace Composer\Autoload;
 class ComposerStaticInit33bb2e837f5bff133b486c79ef8b0804
 {
     public static $prefixLengthsPsr4 = array (
-        'P' => 
+        'T' =>
         array (
-            'Passbook\\' => 9,
+            'Tickera\\WalletPass\\' => 19,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Passbook\\' => 
+        'Tickera\\WalletPass\\' =>
         array (
-            0 => __DIR__ . '/..' . '/eo/passbook/src/Passbook',
+            0 => __DIR__ . '/../..' . '/includes',
         ),
     );
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'Tickera\\WalletPass\\Admin' => __DIR__ . '/../..' . '/includes/Admin.php',
+        'Tickera\\WalletPass\\Api' => __DIR__ . '/../..' . '/includes/Api.php',
+        'Tickera\\WalletPass\\Plugin' => __DIR__ . '/../..' . '/includes/Plugin.php',
+        'WP_Dependency_Installer' => __DIR__ . '/..' . '/afragen/wp-dependency-installer/wp-dependency-installer.php',
+        'WP_Dependency_Installer_Skin' => __DIR__ . '/..' . '/afragen/wp-dependency-installer/wp-dependency-installer-skin.php',
+        'WP_Dismiss_Notice' => __DIR__ . '/..' . '/afragen/wp-dismiss-notice/wp-dismiss-notice.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
