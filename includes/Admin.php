@@ -86,25 +86,6 @@ final class Admin
                                             <input name="tc_apple_wallet[organisation_name]" type="text" id="organisation_name" value="<?php echo \esc_attr($settings['organisation_name']); ?>" class="regular-text" />
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <th scope="row"><label for="team_identifier"><?php \esc_html_e('Team Identifier', 'tcawp'); ?></label></th>
-                                        <td>
-                                            <input name="tc_apple_wallet[team_identifier]" type="text" id="team_identifier" value="<?php echo \esc_attr($settings['team_identifier']); ?>" class="regular-text" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row"><label for="pass_type_identifier"><?php \esc_html_e('Pass Type Identifier', 'tcawp'); ?></label></th>
-                                        <td>
-                                            <input name="tc_apple_wallet[pass_type_identifier]" type="text" id="pass_type_identifier" value="<?php echo \esc_attr($settings['pass_type_identifier']); ?>" class="regular-text" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row"><label for="api_endpoint"><?php \esc_html_e('Pass API Endpoint', 'tcawp'); ?></label></th>
-                                        <td>
-                                            <input name="tc_apple_wallet[api_endpoint]" type="url" id="api_endpoint" value="<?php echo \esc_attr($settings['api_endpoint']); ?>" class="regular-text" placeholder="https://example.com/pass" />
-                                            <p class="description"><?php \esc_html_e('Pass payload will be sent to this endpoint.', 'tcawp'); ?></p>
-                                        </td>
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -161,9 +142,6 @@ final class Admin
             'logo_text' => \sanitize_text_field((string) ($posted['logo_text'] ?? '')),
             'background_color' => \sanitize_text_field((string) ($posted['background_color'] ?? '#aaaaaa')),
             'organisation_name' => \sanitize_text_field((string) ($posted['organisation_name'] ?? '')),
-            'team_identifier' => \sanitize_text_field((string) ($posted['team_identifier'] ?? '')),
-            'pass_type_identifier' => \sanitize_text_field((string) ($posted['pass_type_identifier'] ?? '')),
-            'api_endpoint' => \esc_url_raw((string) ($posted['api_endpoint'] ?? '')),
             'icon_file' => isset($_POST['icon_file']) ? \esc_url_raw((string) \wp_unslash($_POST['icon_file'])) : '',
             'icon_file_id' => isset($_POST['icon_file_id']) ? \absint($_POST['icon_file_id']) : 0,
         ];
@@ -214,9 +192,6 @@ final class Admin
                 'logo_text' => '',
                 'background_color' => '#aaaaaa',
                 'organisation_name' => '',
-                'team_identifier' => '',
-                'pass_type_identifier' => '',
-                'api_endpoint' => '',
             ],
             $settings
         );

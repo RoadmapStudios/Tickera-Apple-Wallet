@@ -6,6 +6,8 @@ namespace Tickera\WalletPass;
 
 final class Api
 {
+    private const CONNECTOR_ENDPOINT = 'customs/wallet/pass';
+
     public static function register(): void
     {
         add_filter('tc_owner_info_orders_table_fields_front', [self::class, 'addWalletColumn']);
@@ -69,11 +71,7 @@ final class Api
         string $lastName
     ): ?string {
         $settings = Admin::getSettings();
-        $endpoint = (string) ($settings['api_endpoint'] ?? '');
-
-        if ($endpoint === '') {
-            return null;
-        }
+        $endpoint = self::CONNECTOR_ENDPOINT;
 
         $payload = [
             'event_title' => $eventTitle,
@@ -89,29 +87,24 @@ final class Api
             'logo_text' => (string) ($settings['logo_text'] ?? ''),
             'background_color' => (string) ($settings['background_color'] ?? ''),
             'organisation_name' => (string) ($settings['organisation_name'] ?? ''),
-            'team_identifier' => (string) ($settings['team_identifier'] ?? ''),
-            'pass_type_identifier' => (string) ($settings['pass_type_identifier'] ?? ''),
         ];
 
-        $response = wp_remote_post(
-            $endpoint,
-            [
-                'method' => 'POST',
-                'timeout' => 20,
-                'headers' => [
-                    'Content-Type' => 'application/json',
-                    'Accept' => 'application/json',
-                ],
-                'body' => wp_json_encode($payload),
-            ]
-        );
+        if (!class_exists('CommerceBird\\Admin\\Connectors\\Connector')) {
+            return null;
+        }
+
+        $connector = new \CommerceBird\Admin\Connectors\Connector();
+        $response = $connector->request($endpoint, 'POST', $payload);
 
         if (is_wp_error($response)) {
             return null;
         }
 
-        $body = wp_remote_retrieve_body($response);
-        $decoded = json_decode($body, true);
+        if (!is_array($response)) {
+            return null;
+        }
+
+        $decoded = $response['data'] ?? $response;
 
         if (!is_array($decoded)) {
             return null;

@@ -6,11 +6,11 @@ With this amazing add-on, you can now enable Apple and Android Wallet for your c
 
 ## How to install
 *Android: no configuration needed for Android.
-*Requirement: Mac with latest stable popular browser.
+*Requirement: subscription at CommerceBird.com
 1. Install the CommerceBird plugin first as this is an add-on to it.
 2. Go to Tickera Event's Settings and click on Apple Wallet
 3. Choose your QR Code Type, upload your small icon in PNG and fill in the text fields for your Pass styling.
 
 ### Support
-For any functional support, please read the documentation first. If you run into any technical issue with this addon, please deactivate all non-essential plugins to ensure there is no plugin conflict. After this, please check the above steps again, most users create the certificate wrong or have expired certificates in their Apple account. If none of these apply to you, please open an issue here in github. 
+For any functional support, please read the documentation first. If you run into any technical issue with this addon, please deactivate all non-essential plugins to ensure there is no plugin conflict.
 *Important: you may need to install WP Add Mime Types plugin if you are unable to download the passes. Please check the documentation.
